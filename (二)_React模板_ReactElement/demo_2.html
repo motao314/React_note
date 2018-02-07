@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<script type="text/javascript" src="js/react.development.js"></script>
+<script type="text/javascript" src="js/react-dom.development.js"></script>
+<script type="text/javascript" src="js/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+var Element = React.createElement(
+	"h1",{
+		id: "title",
+		className: "title",
+		title: "前端笔记", 
+		style:{
+			width: "100px",
+			height: "100px",
+			background: "red"
+		}		
+	}
+);
+ReactDOM.render(
+	Element,
+	document.getElementById("root")
+);	
+</script>	
+</body>
+</html>

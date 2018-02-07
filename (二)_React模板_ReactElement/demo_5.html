@@ -1,0 +1,23 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<script type="text/javascript" src="js/react.development.js"></script>
+<script type="text/javascript" src="js/react-dom.development.js"></script>
+<script type="text/javascript" src="js/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+var Li1 = React.createElement("li",null,"前端笔记");
+var Li2 = React.createElement("li",null,"前端笔记");
+var Ul = React.createElement("ul",null,Li1,Li2);
+ReactDOM.render(
+	Ul,
+	document.getElementById("root")
+);	
+</script>	
+</body>
+</html>

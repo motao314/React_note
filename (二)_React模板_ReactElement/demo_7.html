@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<script type="text/javascript" src="js/react.development.js"></script>
+<script type="text/javascript" src="js/react-dom.development.js"></script>
+<script type="text/javascript" src="js/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+var Title = React.createElement("h1",null,"页面标题");
+var Header = React.createElement("header",null,Title);
+
+var Sider = React.createElement("aside",null,"侧边栏");
+var Content = React.createElement("article",null,"页面内容");
+var Main = React.createElement("div",null,Sider,Content);
+
+var Footer = React.createElement("footer",null,"页面底部");
+
+var Page = React.createElement("div",null,Header,Main,Footer);
+ReactDOM.render(
+	Page,
+	document.getElementById("root")
+);	
+</script>	
+</body>
+</html>
