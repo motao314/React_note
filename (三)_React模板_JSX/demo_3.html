@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="js/react.development.js"></script>
+	<script type="text/javascript" src="js/react-dom.development.js"></script>
+	<script type="text/javascript" src="js/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+let a = 10;
+let b = 20;
+ReactDOM.render(
+	<h1>{a > b?"正确":"错误"}</h1>,
+	document.getElementById("root")
+);	
+</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="js/react.development.js"></script>
+	<script type="text/javascript" src="js/react-dom.development.js"></script>
+	<script type="text/javascript" src="js/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+let data = {
+	title: "巅峰榜·热歌",
+	details: [
+		{
+			name: "体面",
+			message: "《前任3：再见前任》电影插曲"
+		},
+		{
+			name: "说散就散",
+			message: "《前任3：再见前任》电影主题曲"
+		},
+		{
+			name: "BINGBIAN病变 (女声版) ",
+			message: "抖音热门歌曲"
+		}	
+	]
+}
+ReactDOM.render(
+	<section className="box">
+		<h2 className="title">{data.title}</h2>
+		<ul className="list">
+			{data.details.map((item,index)=>{
+				return (
+					<li>
+						<p className="name">{item.name}</p>
+                        <p className="message">{item.message}</p>
+					</li>
+				);
+			})}
+		</ul>
+	</section>,
+	document.getElementById("root")
+);	
+</script>
+</body>
+</html>

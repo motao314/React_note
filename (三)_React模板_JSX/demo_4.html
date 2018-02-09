@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="js/react.development.js"></script>
+	<script type="text/javascript" src="js/react-dom.development.js"></script>
+	<script type="text/javascript" src="js/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+let arr = [
+	"这是第一项",
+	"这是第二项",
+	"这是第三项"
+]
+ReactDOM.render(
+	<ul>
+		{arr.map((item,index)=>{
+			/* 当我们要向 JSX 中添加一组元素时，一定要设置 key 属性，具体内容 我们会在后边的文章中讲到 */
+			return <li key={index}>{item}</li>
+		})}
+	</ul>,
+	document.getElementById("root")
+);	
+</script>
+</body>
+</html>
