@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="js/react.development.js"></script>
+	<script type="text/javascript" src="js/react-dom.development.js"></script>
+	<script type="text/javascript" src="js/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+ReactDOM.render(
+	<div>
+		<header>
+			<h1>页面标题</h1>
+			<nav>
+				<a href="#">首页</a>
+				<a href="#">关于我们</a>
+				<a href="#">加入我们</a>
+			</nav>
+		</header>
+		<div>
+			<aside>
+				<nav>
+					<a href="#">首页</a>
+					<a href="#">关于我们</a>
+					<a href="#">加入我们</a>
+				</nav>
+			</aside>
+			<article>页面内容</article>
+		</div>
+		<footer>页面底部</footer>
+	</div>
+	,
+	document.getElementById("root")
+);	
+</script>
+</body>
+</html>
