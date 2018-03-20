@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<script type="text/javascript" src="js/react.development.js"></script>
+<script type="text/javascript" src="js/react-dom.development.js"></script>
+<script type="text/javascript" src="js/babel.min.js"></script>
+<style type="text/css">
+.red {
+	color: red;	
+}
+.blue {
+	color: blue;	
+}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+class App extends React.Component {
+	constructor(arg){
+		super(arg);
+		this.state = {
+			date: "周六",
+			action: "打篮球",
+			class: "red"
+		}
+		this.changeDate = this.changeDate.bind(this);
+		this.changeAction = this.changeAction.bind(this);
+	}
+	changeDate(){
+		this.setState({
+			date: this.state.date === "周六"?"周日":"周六"
+		});
+		/*
+			state 中，有 三个属性，但是我们只修改了，React 会自己帮我们 进行合并，剩余的两个属性 还是保留之前的值
+		*/
+	}
+	changeAction(){
+		this.setState({
+			action: this.state.action === "打篮球"?"踢足球":"打篮球"
+		});
+		this.setState({
+			class: this.state.class === "red"?"blue":"red"
+		});
+		/*
+			这里我们调用了 两次 setState，但是 React 会把 这两次 setState 操作进行合并，最终 只会 render 一次，大家也可以 在 render 方法中 添加 console 来查看
+
+			当然 上边的 两个 setState 可以 合并写 这里主要是为了给大家演示
+			this.setState({
+				class: this.state.class === "red"?"blue":"red",
+				action: this.state.action === "打篮球"?"踢足球":"打篮球"
+			});
+
+		*/
+	}
+	render(){
+		return (<div>
+			<button onClick={this.changeDate}>切换日期</button>
+			<button onClick={this.changeAction}>切换动作</button>
+			<p className={this.state.class}>{this.state.date},我要去{this.state.action}</p>
+		</div>);
+	}	
+}
+ReactDOM.render(
+	<div>
+		<App />
+	</div>,
+	document.getElementById("root")
+);	
+</script>	
+</body>
+</html>

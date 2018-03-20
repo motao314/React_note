@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<script type="text/javascript" src="js/react.development.js"></script>
+<script type="text/javascript" src="js/react-dom.development.js"></script>
+<script type="text/javascript" src="js/babel.min.js"></script>
+<style type="text/css">
+.like {
+	color: red;
+}	
+.disLike {
+	color: gray;
+}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+class App extends React.Component {
+	constructor(arg){
+		super(arg);
+		/* 我们会在 构造函数中 设置 初始状态 */
+		this.state = {
+			like: true
+		}
+		this.toLike = this.toLike.bind(this);
+	}
+	toLike(){
+		/*修改状态的时，我们需要调用 setState 方法，如果只是直接修改 state 对象，模板并不会渲染*/
+		this.setState({
+			like: !this.state.like
+		});
+		/*
+			调用完 setState 之后，React 会重新调用 该组件的 render 方法，然后重新渲染模板，具体的流程我们在之后的生命周期中，详细的说
+		*/
+	}
+	render(){
+		return (<div>
+			<button onClick={this.toLike}>切换状态</button>
+			<p className={this.state.like?'like':'disLinke'}>我{this.state.like?'喜欢':'不喜欢'}体育运动</p>
+		</div>);
+	}	
+}
+ReactDOM.render(
+	<div>
+		<App />
+	</div>,
+	document.getElementById("root")
+);	
+</script>	
+</body>
+</html>
