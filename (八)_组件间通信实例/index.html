@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="js/react.development.js"></script>
+	<script type="text/javascript" src="js/react-dom.development.js"></script>
+	<script type="text/javascript" src="js/babel.min.js"></script>
+	<style type="text/css">
+		.tab {
+			margin: 0 auto;
+			width: 470px;
+		}
+		.nav {
+			display: flex;
+		}
+		.nav a {
+			flex: 1;
+			font: 12px/30px "宋体";
+			text-decoration: none;
+			text-align: center;
+			border: 1px solid #000;
+			color: #000;
+		}
+		.nav .active {
+			background: #000;
+			color: #fff;
+		}
+	</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+let data = [
+	{
+		txt: "图片一",
+		img: "img/1.jpg"
+	},{
+		txt: "图片二",
+		img: "img/2.jpg"
+	},{
+		txt: "图片三",
+		img: "img/3.jpg"
+	},{
+		txt: "图片四",
+		img: "img/4.jpg"
+	},{
+		txt: "图片五",
+		img: "img/5.jpg"
+	}
+];
+class Nav extends React.Component {
+	change(e){
+		this.props.click(e.target.dataset.index);
+	}
+	render(){
+		return (
+			<nav className="nav">
+				{
+					this.props.data.map((item,index)=>{
+						return <a 
+							href="javascript:;" 
+							className={index == this.props.show?"active":""} 
+							key={index}
+							data-index = {index}
+							onClick = {this.change.bind(this)} 
+						>{item.txt}</a>
+					})
+				}
+			</nav>
+		);
+	}
+}
+class Img extends React.Component {
+	render(){
+		return (<img src={this.props.img} />)
+	}
+}
+class Tab extends React.Component{
+	constructor(arg){
+		super(arg)
+		this.state = {
+			show:0,
+			data
+		};
+		this.changeShow = this.changeShow.bind(this);
+	}
+	changeShow(index){
+		this.setState({
+			show: index
+		});
+	}
+	render(){
+		return (<div className="tab">
+			<Nav data={this.state.data} show={this.state.show} click = {this.changeShow} />
+			<Img img={this.state.data[this.state.show].img} />
+		</div>);
+	}
+}
+ReactDOM.render(
+	<Tab />,
+	document.getElementById("root")
+);	
+</script>
+</body>
+</html>
