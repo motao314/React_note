@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<script type="text/javascript" src="js/react.development.js"></script>
+<script type="text/javascript" src="js/react-dom.development.js"></script>
+<script type="text/javascript" src="js/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+let arr = [
+	"miaov - 妙味课堂",
+	"leo - 刘伟"
+];
+class Li extends React.Component {
+	componentWillReceiveProps(nextPorps){
+		console.log(nextPorps);
+		console.log("父组件更新了");
+	}
+	shouldComponentUpdate(nextProps,nextState){
+		console.log("接收到新的props 或 state 判断是否更新组件");	
+		return true; // 为false 的话，下面的回调不会被执行，也不会重新渲染
+	}
+	componentWillUpdate(nextProps,nextState){
+		console.log("组件即将更新");
+	}
+	componentDidUpdate(prevProps,PrevState){
+		console.log("组件更新完成");
+	}
+	render (){
+		console.log("组件更新"); // render 方法 会在 挂载阶段	
+		let {show,data} = this.props;
+		return <li>{data[show]}</li>;
+	}
+}
+class List extends React.Component {
+	constructor(arg){
+		super(arg);
+		this.state = {
+			show: 0
+		}
+	}	
+	componentDidMount(){
+		// 3秒钟之后 更新 父组件，带动子组件更新 
+		setTimeout(()=>{
+			console.log("父组件更新");
+			this.setState({
+				show:1
+			});
+		},3000);	
+	}
+	render(){
+		return (<ul>
+			<Li show={this.state.show} data={this.props.data} />
+		</ul>);
+	}
+
+};
+ReactDOM.render(
+	<div>
+		<List data={arr}  />
+	</div>,
+	document.getElementById("root")
+);			
+</script>	
+</body>
+</html>

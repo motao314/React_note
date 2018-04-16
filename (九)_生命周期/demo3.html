@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<script type="text/javascript" src="js/react.development.js"></script>
+<script type="text/javascript" src="js/react-dom.development.js"></script>
+<script type="text/javascript" src="js/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+let arr = [
+	"miaov - 妙味课堂",
+	"leo - 刘伟"
+];
+class Li extends React.Component {
+	constructor(arg){
+		super(arg);
+		this.state = {
+			show: this.props.show
+		};
+	}
+	componentWillReceiveProps(nextPorps){
+		console.log("父组件更新了"); //这一步将不会被执行，其余执行顺序，和刚刚一样
+	}
+	shouldComponentUpdate(nextProps,nextState){
+		console.log("接收到新的props 或 state 判断是否更新组件");	
+		return true; // 为false 的话，下面的回调不会被执行，也不会重新渲染
+	}
+	componentWillUpdate(nextProps,nextState){
+		console.log("组件即将更新");
+	}
+	componentDidUpdate(prevProps,PrevState){
+		console.log("组件更新完成");
+	}
+	componentDidMount(){
+		// 组件挂载完 3 秒之后，更新组件
+		setTimeout(()=>{
+			this.setState({
+				show:1
+			});
+		},3000);
+	}
+	render (){
+		console.log("组件更新"); // render 方法 会在 挂载阶段	
+		let {data} = this.props;
+		return <li>{data[this.state.show]}</li>;
+	}
+}
+class List extends React.Component {
+	render(){
+		return (<ul>
+			<Li show={0} data={this.props.data} />
+		</ul>);
+	}
+
+};
+ReactDOM.render(
+	<div>
+		<List data={arr}  />
+	</div>,
+	document.getElementById("root")
+);			
+</script>	
+</body>
+</html>

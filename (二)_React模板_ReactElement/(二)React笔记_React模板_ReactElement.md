@@ -1,6 +1,6 @@
 # React 笔记
 
-## React 模板 -- ReactElement
+## 二 - React 模板 -- ReactElement
 
 上篇文章中我们介绍了 ReactDOM.render 中接收的三种模板：字符串，ReactElement和JSX。字符串 没有什么可以说的，真实的开发中我们也不可能只是向页面中单纯的添加一些文本。那接下我们来说下 ReactElement。
 

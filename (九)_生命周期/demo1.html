@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<script type="text/javascript" src="js/react.development.js"></script>
+<script type="text/javascript" src="js/react-dom.development.js"></script>
+<script type="text/javascript" src="js/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+let arr = [
+	"miaov - 妙味课堂",
+	"leo - 刘伟"
+];
+
+class List extends React.Component {
+	constructor(arg){
+		super(arg);
+		console.log(arg); //父组件传入的数据，也就是 props
+		console.log("创建组件");
+	}	
+	componentWillMount(){
+		console.log("组件即将被挂载");
+	}
+	componentDidMount(){
+		console.log("组件已经挂载完成");	
+	}
+	render(){
+		console.log("把组件渲染到 DOM 中");
+		return <ul></ul>;
+	}
+
+};
+ReactDOM.render(
+	<div>
+		<List data={arr}  />
+	</div>,
+	document.getElementById("root")
+);			
+</script>	
+</body>
+</html>

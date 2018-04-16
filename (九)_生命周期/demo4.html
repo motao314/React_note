@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<script type="text/javascript" src="js/react.development.js"></script>
+<script type="text/javascript" src="js/react-dom.development.js"></script>
+<script type="text/javascript" src="js/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+class Li extends React.Component {
+	componentWillUnmount(){
+		console.log("即将卸载组件");
+	}
+	render (){	
+		return <li>miaov - 妙味课堂</li>;
+	}
+}
+/* 
+根据父级状态决定子组件是否渲染
+默认渲染子组件
+更新父级状态 卸载子组件
+*/
+class List extends React.Component {
+	constructor(arg){
+		super(arg);
+		this.state = {
+			show: true
+		}
+	}
+	componentDidMount(){
+		setTimeout(()=>{
+			this.setState({
+				show: false
+			})
+		},3000);
+	}
+	render(){
+		return (<ul>
+			{this.state.show?<Li />:""}
+		</ul>);
+	}
+
+};
+ReactDOM.render(
+	<div>
+		<List />
+	</div>,
+	document.getElementById("root")
+);			
+</script>	
+</body>
+</html>

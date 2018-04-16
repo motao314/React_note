@@ -1,6 +1,6 @@
 # React 笔记
 
-## 事件和state
+## 七 - 事件和state
 上一篇我们整理了 props 和 父组件向子组件通信，但是子组件向父组件通信，不过在具体讲通信之前，我们需要先来看看另外两个东西 事件 和 state
 
 ### React中的事件添加
@@ -47,7 +47,8 @@ React 中组件内部的修改主要通过 state 也就状态完成，每次 sta
 ```
 class App extends React.Component {
 	constructor(arg){
-		super(arg);
+		/* 注意 React 中，都组件继承自 Component ，在写构造函数时，一定要继承第一个参数，这个参数是 父组件传入 相关信息 */
+		super(arg); 
 		/* 我们会在 构造函数中 设置 初始状态 */
 		this.state = {
 			like: true

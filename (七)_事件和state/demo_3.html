@@ -21,7 +21,7 @@
 <script type="text/babel">
 class App extends React.Component {
 	constructor(arg){
-		super(arg);
+		super(arg); //注意 React 中，都组件继承自 Component ，在写构造函数时，一定要继承第一个参数，这个参数是 父组件传入 相关信息
 		this.state = {
 			date: "周六",
 			action: "打篮球",
