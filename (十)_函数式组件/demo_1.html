@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="js/react.development.js"></script>
+	<script type="text/javascript" src="js/react-dom.development.js"></script>
+	<script type="text/javascript" src="js/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+function List(props){
+	let {list} = props;
+	return (
+		<ul>
+			{list.map((item,index)=>{
+				return <li key={index}>{item}</li>
+			})}
+		</ul>
+	);
+}
+class TabList extends React.Component {
+	constructor(arg){
+		super(arg);
+		this.state = {
+			show: 0,
+			list: [
+				[
+					"列表一选项1",
+					"列表一选项2",
+					"列表一选项3"
+				],[
+					"列表二选项1",
+					"列表二选项2",
+					"列表二选项3"
+				]
+			]
+		}
+	}
+	toTab(show) {
+		this.setState({
+			show
+		});
+	}
+	render(){
+		let {show,list} = this.state;
+		return (
+			<div>
+				<nav>
+					<button onClick={()=>{
+						this.toTab(0);
+					}}>列表1</button>
+					<button onClick={()=>{
+						this.toTab(1);
+					}}>列表2</button>
+				</nav>
+				<List list={list[show]} />
+			</div>
+		);
+	}
+}
+ReactDOM.render(
+	<TabList />
+	,
+	document.getElementById("root")
+);	
+</script>
+</body>
+</html>
