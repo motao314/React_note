@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src="js/babel.min.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<script type="text/babel">
+    class List extends React.Component {
+        constructor(arg){
+            super(arg);
+            this.state = {
+                list: [
+                   {
+                        id:1,
+                        content: "列表项1"
+                   },{
+                        id:2,
+                        content: "列表项2"
+                   },{
+                        id:3,
+                        content: "列表项3"
+                   }
+                ]
+            }
+        }
+        componentDidMount(){
+
+            setTimeout(()=>{
+                let {list} = this.state;
+                list[1].content = "列表项2-新";
+                this.setState({
+                      list
+                })
+            },5000);
+            /*
+                当我们更新完数据之后，React 在对比时，发现只有 key为2的子项对应的数据发生了变话，那在渲染 DOM 时，就只会更新 key 为 2 的元素的DOM
+            */
+        }
+        render(){
+            let {list} = this.state;
+            return (<ul>
+                {list.map((item)=>{
+                    return <li key={item.id}>{item.content}</li>
+                })}
+            </ul>);
+        }
+    }
+    ReactDOM.render(
+        <List />,
+        document.getElementById("app")
+    );
+</script>
+</body>
+</html>

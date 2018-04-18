@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src="js/babel.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+    	class Txt extends React.Component {
+        	render(){
+        		return (<p>前端笔记</p>);
+        	}
+        }
+        class Demo extends React.Component {
+        	componentDidMount(){
+        		console.log(this.refs);// {txt1: p, txt2: Txt} refs 对象的存储的是 refs 获取到的数据
+        		console.log(this.refs.txt1); // <p >妙味课堂</p>  获取到真实的p标签
+        		console.log(this.refs.txt2); 
+        		/*
+        		获取到 Txt 组件实例 
+        			Txt {props: {…}, context: {…}, refs: {…}, updater: {…}, _reactInternalFiber: FiberNode, …}
+        		*/
+
+        		/* 最后注意 函数式组件 不能添加 ref */
+        	}
+        	render(){
+        		return (<div>
+        			<p ref="txt1">妙味课堂</p>
+        			<Txt ref="txt2" />
+        		</div>);
+        	}
+        }
+        ReactDOM.render(
+            <Demo />,
+            document.getElementById("app")
+        );
+    </script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src="js/babel.min.js"></script>
+    <script src="js/data.js"></script>
+    <style>
+        .panel {
+            border: 1px solid #000;
+            width: 600px;
+        }
+        .title {
+            margin: 0;
+            padding: 10px;
+            background: #ccc;
+        }
+        p.vip {
+            color: red;
+        }
+        p.message {
+            color: #aaa;
+        }
+        .listWrap {
+            height: 0;
+            overflow: hidden;
+            transition: .5s;
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+        class List extends React.Component {
+            render(){
+                return (<ul>
+                    {this.props.list.map(function(val,index){
+                        return (
+                            <li key={index}>
+                                <p className="vip">{val.username}</p>
+                                <p className="message">{val.message}</p>
+                            </li>
+                        )
+                    })}
+                </ul>);
+            }
+        }
+        class Item extends React.Component {
+            constructor(){
+                super(...arguments);
+                this.state = {
+                  show: this.props.show
+                };
+            }
+            showList(show){
+                var list = this.refs.list;
+                if(show){
+                    list.style.height = list.scrollHeight + "px";
+                } else {
+                    list.style.height = 0;
+                }
+            }
+            componentDidMount(){
+                this.showList(this.state.show);
+            }
+            shouldComponentUpdate(nextProps,nextState){
+                if(this.state.show !=  nextProps.show){
+                    this.setState({
+                        show: nextProps.show
+                    });
+                }
+                if(this.state.show != nextState.show){
+                    this.showList(nextState.show);
+                }
+                return false;
+            }
+            changeList(){
+                let show = !this.state.show;
+                this.setState({
+                    show
+                });
+                if(show){
+                    this.props.onChange(this.props.index);
+                }
+            }
+            render(){
+                console.log(this.state.show);
+                return (<div>
+                    <h2 className="title" onClick={this.changeList.bind(this)}>{this.props.data.name}</h2>
+                    <div className="listWrap" ref="list">
+                        <List list={this.props.data.list}/>
+                    </div>
+                </div>);
+            }
+        }
+        class Penel extends React.Component {
+            constructor(){
+                super(...arguments);
+                this.state = {
+                    showList:[true,false,false]
+                }
+                this.changeList = this.changeList.bind(this);
+            }
+            changeList(i){
+                let showList = this.state.showList.map(function(val,index){
+                    if(i == index){
+                        return true;
+                    }
+                    return false;
+                });
+                this.setState({
+                    showList
+                });
+            }
+            setShow(){
+                var list = Object.keys(dataList).map((val,index) =>{
+                       return (
+                           <Item
+                                data={dataList[val]}
+                                key={index}
+                                show={this.state.showList[index]}
+                                onChange={this.changeList}
+                                index = {index}
+                       />)
+                });
+                return list;
+            }
+            render(){
+                return  (
+                    <div className="panel">
+                        {this.setShow()}
+                    </div>
+                );
+            }
+        }
+        ReactDOM.render(
+           <Penel /> ,
+            document.getElementById("app")
+        );
+    </script>
+</body>
+</html>
