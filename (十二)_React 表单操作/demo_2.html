@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src="js/babel.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+        class Form extends React.Component {
+        	constructor(arg){
+                super(arg);
+                this.state = {
+                    val: "请输入姓名",
+                    checked: true
+                };
+            }
+            componentDidMount(){
+                setTimeout(()=>{
+                    this.setState({
+                        val: "天气不错",
+                        checked: false
+                    });
+                },5000);
+            }
+            render(){
+        		return (<form>
+        			<input 
+                        type="text" 
+                        defaultValue={this.state.val} 
+                    />
+                    <input 
+                        type="checkbox" 
+                        defaultChecked={this.state.checked}  
+                    />
+                    <input type="submit" value="提交" />
+        		</form>);
+        	}
+        }
+        ReactDOM.render(
+            <Form />,
+            document.getElementById("app")
+        );
+    </script>
+</body>
+</html>
